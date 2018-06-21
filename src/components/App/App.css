@@ -40,3 +40,9 @@ td{
   width: 400px;
   border: 2px solid black;
 }
+.card {
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  
+}
