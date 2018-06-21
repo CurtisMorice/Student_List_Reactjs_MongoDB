@@ -9,6 +9,7 @@ class App extends Component {
     // Keep track of the student list
     this.state = {
       studentList: [],
+      info:{},
     };
 
     // Give our function access to `this`
@@ -39,6 +40,7 @@ async getInfo(userName) {
   `)
 
   .then((response)=>{
+    this.setState({info:{...response.data}});
   
       console.log('Username',response);
     }).catch((error)=>{
@@ -83,8 +85,8 @@ async getInfo(userName) {
         <thead>
           <tr>
             <th>Student List</th>
-          
           <th>Info Getter</th>
+         
           </tr>
         </thead>
         <tbody>{
@@ -95,11 +97,21 @@ async getInfo(userName) {
         
           <td><button onClick={(event) => this.getInfo(student.github, event)}>More Details</button></td>
           </tr>
+
+
           )}
           </tbody>
       </table>
-
       </div>
+      <div className="card">
+      
+          <img  src={this.state.info.avatar_url} alt="yourFace"/>
+          
+      <ul>
+        <li>{this.state.info.bio}</li>
+      </ul>
+      </div>
+      
       </div>
       
  
