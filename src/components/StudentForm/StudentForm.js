@@ -8,8 +8,8 @@ class Student {
 };
 
 class StudentForm extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = new Student();
 
@@ -41,6 +41,7 @@ class StudentForm extends Component {
                 <input onChange={this.handleChange} placeholder="GitHub username" value={this.state.github} name="github" />
                 <input type="submit" value="Submit" />
             </form>
+            
         );
     }
 }
