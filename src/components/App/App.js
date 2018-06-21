@@ -17,6 +17,8 @@ class App extends Component {
   componentDidMount() {
     console.log('App component mounted');
     this.getStudent()
+
+    
   }
   
 getStudent(){
@@ -29,8 +31,26 @@ console.log('getStudent',response.data);
   console.log('in getStudent', error);
 })
 }
-  // This function is called by the StudentForm when the submit button is pressed
+
+
+async getInfo(userName) {
+
+  await axios.get(`https://api.github.com/users/${userName}?access_token=913f20e25e454b699cbf7b4d5f3ae7fd516cafc4
+  `)
+
+  .then((response)=>{
   
+      console.log('Username',response);
+    }).catch((error)=>{
+      console.log(error);
+    });
+  }
+  // This function is called by the StudentForm when the submit button is pressed
+  handleSubmit(event) {
+    event.preventDefault();
+    this.state.addStudent(this.state);
+    this.clearStudentFields();
+}
   
  
   addStudent(newStudent) {
@@ -61,16 +81,24 @@ console.log('getStudent',response.data);
         <div>
         <table>
         <thead>
-          <tr><th>Student List</th></tr>
+          <tr>
+            <th>Student List</th>
+          
+          <th>Info Getter</th>
+          </tr>
         </thead>
         <tbody>{
           this.state.studentList.map(student =>
           <tr key={student._id}>
-          <td>{student.github}</td>
+          <td>{student.github} 
+          </td>
+        
+          <td><button onClick={(event) => this.getInfo(student.github, event)}>More Details</button></td>
           </tr>
           )}
           </tbody>
       </table>
+
       </div>
       </div>
       
