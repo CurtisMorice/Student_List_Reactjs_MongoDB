@@ -35,4 +35,15 @@ router.get('/', function (req, res) {
     }); // END FIND
 }); // END GET Route
 
+router.delete('/:_id', function (req, res) {
+    console.log('in router delete',req.params);
+ Student.findByIdAndRemove(req.params._id)
+ .then((response)=>{
+     console.log('in router delete', response);
+     res.sendStatus(200);
+ }).catch((error)=>{
+     console.log('error in router delete', error);
+     res.sendStatus(500);
+ })
+}); // END POST Route
 module.exports = router;

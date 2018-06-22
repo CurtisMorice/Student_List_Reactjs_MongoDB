@@ -34,9 +34,9 @@ console.log('getStudent',response.data);
 }
 
 
-async getInfo(userName) {
+getInfo(userName) {
 
-  await axios.get(`https://api.github.com/users/${userName}?access_token=913f20e25e454b699cbf7b4d5f3ae7fd516cafc4
+axios.get(`https://api.github.com/users/${userName}?access_token=913f20e25e454b699cbf7b4d5f3ae7fd516cafc4
   `)
 
   .then((response)=>{
@@ -66,7 +66,19 @@ async getInfo(userName) {
     
     // POST your data here
   }
+gitDelete(student){
+  console.log(student);
+  axios.delete(`/students/${student}`, {data: {id: student }})
 
+  .then((response)=> {
+console.log('response', response);
+this.getStudent();
+
+  }).catch((error)=>{
+    console.log(error);
+    
+  });
+}
 
 
   render() {
@@ -96,9 +108,9 @@ async getInfo(userName) {
           </td>
         
           <td><button onClick={(event) => this.getInfo(student.github, event)}>More Details</button></td>
+          
+          <td><button onClick={(event) => this.gitDelete(student._id, event)}>Delete</button></td>
           </tr>
-
-
           )}
           </tbody>
       </table>
